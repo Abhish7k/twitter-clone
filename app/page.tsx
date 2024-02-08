@@ -1,3 +1,4 @@
+import FeedCard from "@/components/FeedCard";
 import React from "react";
 import { BiBookmark, BiUser } from "react-icons/bi";
 import { BsTwitter } from "react-icons/bs";
@@ -59,13 +60,19 @@ export default function Home() {
               ))}
             </ul>
             <div className="mt-5 pr-10">
-              <button className="w-full py-4 font-bold rounded-full bg-[#1D9BF0]">
+              <button className="w-full py-4 font-bold rounded-full bg-[#1D9BF0] hover:bg-[#1190e4] transition-all">
                 Tweet
               </button>
             </div>
           </div>
         </div>
-        <div className="col-span-5 border-r border-l-[0.1px] border-slate-700"></div>
+        <div className="col-span-5 border-r border-l-[0.1px] border-slate-700">
+          <FeedCard />
+          <FeedCard />
+          <FeedCard />
+          <FeedCard />
+        </div>
+
         <div className="col-span-4 "></div>
       </div>
     </div>
