@@ -1,5 +1,10 @@
 import Image from "next/image";
 import React from "react";
+import { BiMessageRounded } from "react-icons/bi";
+import { FaRetweet } from "react-icons/fa";
+import { FiUpload } from "react-icons/fi";
+import { GoHeart } from "react-icons/go";
+import { MdOutlineFileUpload } from "react-icons/md";
 
 type Props = {};
 
@@ -19,6 +24,20 @@ const FeedCard = (props: Props) => {
         <div className="col-span-11 pl-3">
           <h5 className="font-semibold hover:underline">Abhishek</h5>
           <p>this is a very very long tweet</p>
+          <div className="flex justify-between mt-2 pr-10">
+            <div>
+              <BiMessageRounded />
+            </div>
+            <div>
+              <FaRetweet />
+            </div>
+            <div>
+              <GoHeart />
+            </div>
+            <div>
+              <FiUpload />
+            </div>
+          </div>
         </div>
       </div>
     </div>
