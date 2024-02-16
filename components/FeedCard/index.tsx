@@ -16,15 +16,15 @@ const FeedCard = (props: Props) => {
           <Image
             src="https://avatars.githubusercontent.com/u/136176663?v=4"
             alt="profile-image"
-            height={50}
-            width={50}
+            height={40}
+            width={40}
             className="rounded-full"
           />
         </div>
-        <div className="col-span-11 pl-3">
+        <div className="col-span-11 pl-1">
           <h5 className="font-semibold hover:underline">Abhishek</h5>
           <p>this is a very very long tweet</p>
-          <div className="flex justify-between mt-2 pr-10">
+          <div className="flex justify-between mt-4 pr-14 items-center">
             <div>
               <BiMessageRounded />
             </div>

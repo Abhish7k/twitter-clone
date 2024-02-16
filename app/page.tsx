@@ -54,7 +54,7 @@ export default function Home() {
                   className="mt-2 flex justify-start items-center gap-4 hover:bg-gray-900 rounded-full pl-3 pr-8 py-3 w-fit cursor-pointer"
                   key={item.title}
                 >
-                  <span className="text-2xl">{item.icon}</span>
+                  <span className="text-3xl">{item.icon}</span>
                   <span className="text-xl">{item.title}</span>
                 </li>
               ))}
