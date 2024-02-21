@@ -1,3 +1,5 @@
+"use client";
+
 import FeedCard from "@/components/FeedCard";
 import React from "react";
 import { BiBookmark, BiUser } from "react-icons/bi";
@@ -6,6 +8,8 @@ import { CgSearch } from "react-icons/cg";
 import { GoHomeFill } from "react-icons/go";
 import { HiOutlineEnvelope } from "react-icons/hi2";
 import { PiBell } from "react-icons/pi";
+
+import { GoogleLogin } from "@react-oauth/google";
 
 interface TwitterSidebarButton {
   title: string;
@@ -73,7 +77,12 @@ export default function Home() {
           <FeedCard />
         </div>
 
-        <div className="col-span-4 "></div>
+        <div className="col-span-4 p-5">
+          <div className="p-5 mx-16 bg-slate-700 rounded-lg">
+            <h1 className="my-2 text-xl">New to Twitter ?</h1>
+            <GoogleLogin onSuccess={(cred) => console.log(cred)} />
+          </div>
+        </div>
       </div>
     </div>
   );
