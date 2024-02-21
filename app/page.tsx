@@ -9,7 +9,7 @@ import { GoHomeFill } from "react-icons/go";
 import { HiOutlineEnvelope } from "react-icons/hi2";
 import { PiBell } from "react-icons/pi";
 
-import { GoogleLogin } from "@react-oauth/google";
+import { GoogleLogin, useGoogleLogin } from "@react-oauth/google";
 
 interface TwitterSidebarButton {
   title: string;
@@ -44,6 +44,11 @@ const sidebarMenuItems: TwitterSidebarButton[] = [
 ];
 
 export default function Home() {
+  const googleLogin = useGoogleLogin({
+    onSuccess: (cred) => console.log(cred),
+    onError: (error) => console.log("Login Failed:", error),
+  });
+
   return (
     <div>
       <div className="grid grid-cols-12 h-screen w-screen px-44">
@@ -80,7 +85,14 @@ export default function Home() {
         <div className="col-span-4 p-5">
           <div className="p-5 mx-16 bg-slate-700 rounded-lg">
             <h1 className="my-2 text-xl">New to Twitter ?</h1>
-            <GoogleLogin onSuccess={(cred) => console.log(cred)} />
+            <div>
+              <button
+                className="border rounded-lg p-2 w-full bg-white text-black text-center"
+                onClick={() => googleLogin()}
+              >
+                Sign in with Google
+              </button>
+            </div>
           </div>
         </div>
       </div>
