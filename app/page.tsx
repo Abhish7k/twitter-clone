@@ -44,11 +44,6 @@ const sidebarMenuItems: TwitterSidebarButton[] = [
 ];
 
 export default function Home() {
-  const googleLogin = useGoogleLogin({
-    onSuccess: (cred) => console.log(cred),
-    onError: (error) => console.log("Login Failed:", error),
-  });
-
   return (
     <div>
       <div className="grid grid-cols-12 h-screen w-screen px-44">
@@ -86,12 +81,7 @@ export default function Home() {
           <div className="p-5 mx-16 bg-slate-700 rounded-lg">
             <h1 className="my-2 text-xl">New to Twitter ?</h1>
             <div>
-              <button
-                className="border rounded-lg p-2 w-full bg-white text-black text-center"
-                onClick={() => googleLogin()}
-              >
-                Sign in with Google
-              </button>
+              <GoogleLogin onSuccess={(cred) => console.log(cred)} />
             </div>
           </div>
         </div>
