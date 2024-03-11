@@ -15,6 +15,7 @@ import { graphqlClient } from "@/clients/api";
 import { verifyUserGoogleTokenQuery } from "@/graphql/query/user";
 import { useCurrentUser } from "@/hooks/user";
 import { useQueryClient } from "@tanstack/react-query";
+import Image from "next/image";
 
 interface TwitterSidebarButton {
   title: string;
@@ -82,6 +83,7 @@ export default function Home() {
   return (
     <div>
       <div className="grid grid-cols-12 h-screen w-screen px-44">
+        {/* Sidebar */}
         <div className="col-span-3 px-2 py-2 pl-14">
           <div className="text-4xl p-3 -mr-20 h-fit w-fit rounded-full hover:bg-gray-900 cursor-pointer transition-all">
             <BsTwitter />
@@ -104,6 +106,23 @@ export default function Home() {
               </button>
             </div>
           </div>
+          {user && (
+            <div className="absolute bottom-10 flex gap-4 items-center hover:bg-gray-900 hover:cursor-pointer py-4 pl-4 pr-[5%] rounded-full">
+              {user && user.profileImageUrl && (
+                <Image
+                  src={user?.profileImageUrl}
+                  alt="profile-image"
+                  height={40}
+                  width={40}
+                  className="rounded-full"
+                />
+              )}
+              <h3 className="text-xl">
+                {user.firstName}
+                {user.lastName}
+              </h3>
+            </div>
+          )}
         </div>
         <div className="col-span-5 border-r border-l-[0.1px] border-slate-700">
           <FeedCard />
@@ -111,7 +130,6 @@ export default function Home() {
           <FeedCard />
           <FeedCard />
         </div>
-
         <div className="col-span-4 p-5">
           {!user && (
             <div className="p-5 mx-16 bg-slate-700 rounded-lg">
