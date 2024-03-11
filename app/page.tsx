@@ -13,6 +13,8 @@ import { CredentialResponse, GoogleLogin } from "@react-oauth/google";
 import toast, { Toaster } from "react-hot-toast";
 import { graphqlClient } from "@/clients/api";
 import { verifyUserGoogleTokenQuery } from "@/graphql/query/user";
+import { useCurrentUser } from "@/hooks/user";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface TwitterSidebarButton {
   title: string;
@@ -47,6 +49,12 @@ const sidebarMenuItems: TwitterSidebarButton[] = [
 ];
 
 export default function Home() {
+  const { user } = useCurrentUser();
+
+  const queryClient = useQueryClient();
+
+  console.log(user);
+
   const handleLoginWithGoogle = useCallback(
     async (cred: CredentialResponse) => {
       const googleToken = cred.credential;
@@ -65,8 +73,10 @@ export default function Home() {
       if (verifyGoogleToken) {
         window.localStorage.setItem("__twitter_token", verifyGoogleToken);
       }
+
+      await queryClient.invalidateQueries({ queryKey: ["current-user"] });
     },
-    []
+    [queryClient]
   );
 
   return (
@@ -103,12 +113,14 @@ export default function Home() {
         </div>
 
         <div className="col-span-4 p-5">
-          <div className="p-5 mx-16 bg-slate-700 rounded-lg">
-            <h1 className="my-2 text-xl">New to Twitter ?</h1>
-            <div>
-              <GoogleLogin onSuccess={handleLoginWithGoogle} />
+          {!user && (
+            <div className="p-5 mx-16 bg-slate-700 rounded-lg">
+              <h1 className="my-2 text-xl">New to Twitter ?</h1>
+              <div>
+                <GoogleLogin onSuccess={handleLoginWithGoogle} />
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </div>
