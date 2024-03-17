@@ -16,6 +16,8 @@ import { verifyUserGoogleTokenQuery } from "@/graphql/query/user";
 import { useCurrentUser } from "@/hooks/user";
 import { useQueryClient } from "@tanstack/react-query";
 import Image from "next/image";
+import { FaRegImage } from "react-icons/fa";
+import { FiImage } from "react-icons/fi";
 
 interface TwitterSidebarButton {
   title: string;
@@ -80,6 +82,13 @@ export default function Home() {
     [queryClient]
   );
 
+  const handleSelectImage = useCallback(() => {
+    const input = document.createElement("input");
+    input.setAttribute("type", "file");
+    input.setAttribute("accept", "image/*");
+    input.click();
+  }, []);
+
   return (
     <div>
       <div className="grid grid-cols-12 h-screen w-screen px-44">
@@ -125,6 +134,39 @@ export default function Home() {
           )}
         </div>
         <div className="col-span-5 border-r border-l-[0.1px] border-slate-700">
+          <div>
+            <div className="p-4 border-b border-gray-600 transition-all">
+              <div className="grid grid-cols-12 gap-3">
+                <div className="col-span-1">
+                  {user?.profileImageUrl && (
+                    <Image
+                      src={user?.profileImageUrl}
+                      alt=""
+                      height={40}
+                      width={40}
+                      className="rounded-full"
+                    />
+                  )}
+                </div>
+                <div className="col-span-11">
+                  <textarea
+                    className="text-xl w-full bg-transparent focus:outline-none"
+                    placeholder="What is happening?!"
+                    rows={2}
+                  ></textarea>
+                  <div className="mt-2 flex justify-between items-center">
+                    <FiImage
+                      onClick={handleSelectImage}
+                      className="text-blue-400 cursor-pointer"
+                    />
+                    <button className="font-semibold px-3 py-1 rounded-full bg-[#1D9BF0]">
+                      Tweet
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
           <FeedCard />
           <FeedCard />
           <FeedCard />
